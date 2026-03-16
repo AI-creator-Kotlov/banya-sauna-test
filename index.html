@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Тест из 10 вопросов: отличаете ли вы русскую баню от финской сауны? Проверьте знания и узнайте больше о правильном парении.">
+  <meta name="keywords" content="русская баня, финская сауна, отличие бани и сауны, тест баня или сауна, банный тест, парение веником">
+  <meta property="og:title" content="Тест: Баня или сауна — проверьте знания | Пар-мастер Александр Котлов">
+  <meta property="og:description" content="10 вопросов о бане и сауне. Узнайте, насколько вы разбираетесь в банном отдыхе.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <title>Тест: Баня или сауна | Пар-мастер Александр Котлов</title>
+  <style>
+    :root {
+      --bg: #1e1712;
+      --bg-soft: #2a211a;
+      --card: rgba(255, 248, 238, 0.08);
+      --text: #f7efe6;
+      --muted: #dbcab8;
+      --accent: #d39a56;
+      --accent-2: #b76d3b;
+      --ok: #9fd3a8;
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(211, 154, 86, 0.18), transparent 35%),
+        linear-gradient(180deg, #241b15 0%, #19120e 100%);
+      min-height: 100vh;
+    }
+
+    .steam, .steam::before, .steam::after {
+      position: fixed;
+      inset: auto;
+      width: 46vw;
+      height: 46vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.10), rgba(255,255,255,0.02) 55%, transparent 70%);
+      filter: blur(24px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .steam { top: 4%; left: -10%; }
+    .steam::before { content: ""; top: 22vh; left: 68vw; position: fixed; }
+    .steam::after { content: ""; top: 58vh; left: 8vw; position: fixed; }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: min(960px, calc(100% - 32px));
+      margin: 28px auto 56px;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)),
+        linear-gradient(120deg, rgba(183,109,59,0.18), rgba(211,154,86,0.06));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      padding: 34px 28px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -40px;
+      top: -30px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(211,154,86,0.22), transparent 70%);
+      filter: blur(8px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 720px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .quiz {
+      margin-top: 22px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .question {
+      background: rgba(255, 248, 238, 0.07);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .question h3 {
+      margin: 0 0 14px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+      cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .option:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(211,154,86,0.45);
+    }
+
+    .option input {
+      accent-color: var(--accent);
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .share-bar,
+    .controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .persona {
+      margin: 12px 0 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-weight: 700;
+    }
+
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 18px;
+      padding: 15px 22px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+
+    .primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #1f140d;
+    }
+
+    .ghost {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .result {
+      margin-top: 18px;
+      padding: 24px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(211,154,86,0.16), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    .result.show { display: block; }
+
+    .score {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .result h2 {
+      margin: 0 0 10px;
+      font-size: 30px;
+    }
+
+    .result p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 17px;
+    }
+
+    .tip {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(159, 211, 168, 0.08);
+      border: 1px solid rgba(159, 211, 168, 0.18);
+      color: #dff2e3;
+    }
+
+    .cta {
+      margin-top: 22px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(211,154,86,0.12));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    .cta h2 {
+      margin: 0 0 10px;
+      font-size: clamp(26px, 4vw, 38px);
+      line-height: 1.1;
+    }
+
+    .cta p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 17px;
+      max-width: 760px;
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 18px;
+    }
+
+    .cta-intro {
+      display:flex;
+      gap:20px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .cta-photo {
+      flex:0 0 180px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .cta-photo img {
+      width:100%;
+      max-width:180px;
+      border-radius:20px;
+      object-fit:cover;
+      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,0.12);
+    }
+
+    .cta-text {
+      flex:1;
+      min-width:240px;
+    }
+
+    .cta-photo img {
+      width:100%;
+      max-width:200px;
+      border-radius:20px;
+      object-fit:cover;
+      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,0.12);
+    }
+
+    .cta-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 18px;
+    }
+
+    .cta-card strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      min-height: 50px;
+      border-radius: 16px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.07);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .contact-link:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .contact-link.primary-link {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #1f140d;
+      border: none;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 700px) {
+      .cta-grid { grid-template-columns: 1fr; }
+      .cta-photo { justify-content:flex-start; }
+
+      .wrap { width: min(100% - 20px, 960px); }
+      .hero { padding: 24px 18px; border-radius: 24px; }
+      .question { padding: 18px; }
+      .stats { grid-template-columns: 1fr; }
+      .cta-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 34px; }
+      .lead { font-size: 16px; }
+      .question h3 { font-size: 19px; }
+      .option { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="steam"></div>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="badge">Тест от пар-мастера Александра Котлова</div>
+      <h1>Баня или сауна: кто вы в мире жара?</h1>
+      <p class="lead">
+        10 вопросов без занудства: проверим, отличаете ли вы мягкий влажный пар от сухого жара,
+        где дружит веник, а где лучше просто спокойно посидеть и не спорить с термометром.
+      </p>
+
+      <div class="stats">
+        <div class="stat"><strong>10</strong><span>вопросов</span></div>
+        <div class="stat"><strong>2–3 мин</strong><span>на прохождение</span></div>
+        <div class="stat"><strong>3</strong><span>варианта результата</span></div>
+      </div>
+    </section>
+
+    <form class="quiz" id="quizForm">
+      <div class="question">
+        <h3>1. Что обычно характерно для русской бани?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q1" value="1"> Более мягкий влажный пар</label>
+          <label class="option"><input type="radio" name="q1" value="0"> Сухой и очень горячий воздух</label>
+          <label class="option"><input type="radio" name="q1" value="0"> Кондиционер и прохладный бриз</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>2. Какая температура чаще встречается в финской сауне?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q2" value="1"> 90–110°C</label>
+          <label class="option"><input type="radio" name="q2" value="0"> 50–65°C</label>
+          <label class="option"><input type="radio" name="q2" value="0"> 30–40°C</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>3. Где веник чувствует себя как дома?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q3" value="0"> В сауне</label>
+          <label class="option"><input type="radio" name="q3" value="1"> В русской бане</label>
+          <label class="option"><input type="radio" name="q3" value="0"> На кухне рядом с совком</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>4. Что обычно ощущается в сауне сильнее всего?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q4" value="1"> Сухой жар</label>
+          <label class="option"><input type="radio" name="q4" value="0"> Влажный туман</label>
+          <label class="option"><input type="radio" name="q4" value="0"> Морской бриз</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>5. Почему русская баня многим кажется мягче по ощущениям?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q5" value="0"> Потому что там нет печи</label>
+          <label class="option"><input type="radio" name="q5" value="0"> Потому что в ней всегда прохладно</label>
+          <label class="option"><input type="radio" name="q5" value="1"> Из-за сочетания умеренной температуры и влажности</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>6. Что обычно делают между заходами в баню?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q6" value="1"> Отдыхают, пьют воду или чай, охлаждаются</label>
+          <label class="option"><input type="radio" name="q6" value="0"> Проверяют, кто героически просидел дольше всех</label>
+          <label class="option"><input type="radio" name="q6" value="0"> Сразу бегут обратно без паузы</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>7. В каком формате чаще строится посещение русской бани?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q7" value="0"> Один длинный заход, без остановки</label>
+          <label class="option"><input type="radio" name="q7" value="1"> Постепенный прогрев, парение, отдых</label>
+          <label class="option"><input type="radio" name="q7" value="0"> Только охлаждение, без прогрева</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>8. Что обычно сложнее переносится неподготовленному человеку?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q8" value="1"> Сухой жар сауны</label>
+          <label class="option"><input type="radio" name="q8" value="0"> Мягкий влажный пар бани</label>
+          <label class="option"><input type="radio" name="q8" value="0"> Тёплый чай после процедуры</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>9. Что точнее описывает сауну?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q9" value="1"> Быстрый прогрев и сухой воздух</label>
+          <label class="option"><input type="radio" name="q9" value="0"> Влажный пар и активная работа веником</label>
+          <label class="option"><input type="radio" name="q9" value="0"> Лёгкий летний ветерок</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>10. Что помогает получить от бани больше пользы?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q10" value="1"> Не спешить, слушать тело и не геройствовать</label>
+          <label class="option"><input type="radio" name="q10" value="0"> Терпеть до последнего ради спортивного интереса</label>
+          <label class="option"><input type="radio" name="q10" value="0"> Игнорировать жажду и отдых</label>
+        </div>
+      </div>
+
+      <div class="share-bar" id="shareBar" style="display:none; margin-top:18px;">
+        <button type="button" class="ghost" onclick="shareVK()">🔵 Поделиться в VK</button>
+        <button type="button" class="ghost" onclick="shareTelegram()">✈️ Поделиться в Telegram</button>
+        <button type="button" class="ghost" onclick="copyResult()">📋 Скопировать результат</button>
+      </div>
+
+      <div class="controls">
+        <button type="button" class="primary" onclick="checkQuiz()">Узнать результат</button>
+        <button type="reset" class="ghost" onclick="resetQuiz()">Сбросить ответы</button>
+      </div>
+    </form>
+
+    <section class="result" id="resultBox" aria-live="polite">
+      <div class="score" id="scoreText"></div>
+      <div class="persona" id="personaText"></div>
+      <h2 id="titleText"></h2>
+      <p id="descText"></p>
+      <div class="tip" id="tipText"></div>
+    </section>
+
+    <section class="cta">
+      <h2>Хотите не просто пройти тест, а попробовать правильный пар?</h2>
+      <div class="cta-intro">
+        <div class="cta-photo">
+          <img src="портрет квадрат.png" alt="Пар-мастер Александр Котлов" />
+        </div>
+        <div class="cta-text">
+          <p>Я — пар-мастер Александр Котлов. Провожу банные программы с мягким прогревом, парением вениками и спокойным, понятным подходом без банного экстрима. Если хочется не теории, а личного опыта — можно записаться на процедуру и почувствовать разницу между баней и сауной на себе.</p>
+        </div>
+      </div>
+      </p>
+
+      <div class="cta-grid">
+        <div class="cta-card">
+          <strong>Что получает гость</strong>
+          <p>Спокойный и внимательный банный процесс: мягкий прогрев, парение вениками и паузы на отдых. Всё проходит в комфортном ритме без перегрева и «героизма». Подходит и тем, кто идёт в баню впервые, и тем, кто уже знает цену хорошему пару.</p>
+        </div>
+        <div class="cta-card">
+          <strong>Запись и контакты</strong>
+          <div class="contact-list">
+            <a class="contact-link primary-link" href="tel:+79126074796">📞 Позвонить: 8 (912) 607-47-96</a>
+            <a class="contact-link" href="https://t.me/kotlov85" target="_blank" rel="noopener noreferrer">✈️ Написать в Telegram</a>
+            <a class="contact-link" href="https://vk.com/akotlov_parmeister" target="_blank" rel="noopener noreferrer">🔵 Открыть VK</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">Автор и разработчик - AI-контент-креатор Анастасия Котлова https://t.me/akotlova_ai_creator . Разработано в ChatGPT, 2026.</div>
+  </main>
+
+  <script>
+    function getResultData(score) {
+      if (score <= 4) {
+        return {
+          persona: 'Новичок',
+          title: 'Вы только разогреваетесь',
+          desc: 'Похоже, баня и сауна пока для вас где-то рядом, но ещё не по полочкам. Ничего страшного: половина людей вообще думает, что разница только в названии и градуснике.',
+          tip: 'Совет от Александра: начните с русской бани в спокойном режиме. Так проще почувствовать разницу между мягким паром и сухим жаром.'
+        };
+      }
+
+      if (score <= 8) {
+        return {
+          persona: 'Любитель пара',
+          title: 'Уже свой человек в теме',
+          desc: 'Вы хорошо понимаете базовые отличия бани и сауны. Уже не пойдёте в парную с настроем «сейчас как выдержу 20 минут и всех удивлю». И это очень здравый подход.',
+          tip: 'Совет от Александра: попробуйте парение с профессиональным пар-мастером — разница ощущается быстрее, чем любая теория.'
+        };
+      }
+
+      return {
+        persona: 'Дед Палыч',
+        title: 'Почти банный сомелье',
+        desc: 'Вы отлично различаете баню и сауну, понимаете, как устроены ощущения и почему влажность меняет всё. С вами уже можно обсуждать пар, веники и характер жара без лишних пояснений.',
+        tip: 'Совет от Александра: сохраните страницу и отправьте друзьям. Пусть тоже узнают, что баня — это не просто «погорячее посидеть».'
+      };
+    }
+
+    function buildShareText(data = window.currentQuizResult) {
+      const base = 'Я прошёл тест «Баня или сауна?»';
+      if (!data) return `${base}. Попробуйте и вы!`;
+      return `${base} и получил результат: ${data.score}/10 — ${data.persona}. ${data.title}. А у вас что выйдет?`;
+    }
+
+    function checkQuiz() {
+      const totalQuestions = 10;
+      let score = 0;
+      let answered = 0;
+
+      for (let i = 1; i <= totalQuestions; i += 1) {
+        const picked = document.querySelector(`input[name="q${i}"]:checked`);
+        if (picked) {
+          answered += 1;
+          score += Number(picked.value);
+        }
+      }
+
+      if (answered < totalQuestions) {
+        alert(`Вы ответили не на все вопросы. Осталось: ${totalQuestions - answered}`);
+        return;
+      }
+
+      const result = getResultData(score);
+      const resultBox = document.getElementById('resultBox');
+      const scoreText = document.getElementById('scoreText');
+      const titleText = document.getElementById('titleText');
+      const personaText = document.getElementById('personaText');
+      const descText = document.getElementById('descText');
+      const tipText = document.getElementById('tipText');
+      const shareBar = document.getElementById('shareBar');
+
+      scoreText.textContent = `Ваш результат: ${score} из 10`;
+      personaText.textContent = `Персонаж: ${result.persona}`;
+      titleText.textContent = result.title;
+      descText.textContent = result.desc;
+      tipText.textContent = result.tip;
+
+      window.currentQuizResult = {
+        score,
+        persona: result.persona,
+        title: result.title
+      };
+
+      resultBox.classList.add('show');
+      shareBar.style.display = 'flex';
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function resetQuiz() {
+      const resultBox = document.getElementById('resultBox');
+      const shareBar = document.getElementById('shareBar');
+      resultBox.classList.remove('show');
+      shareBar.style.display = 'none';
+      window.currentQuizResult = null;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function shareVK() {
+      const text = encodeURIComponent(buildShareText());
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://vk.com/share.php?url=${url}&comment=${text}`, '_blank', 'noopener');
+    }
+
+    function shareTelegram() {
+      const shareText = buildShareText();
+      const url = window.location.href;
+      const text = encodeURIComponent(`${shareText} ${url}`);
+      window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${text}`, '_blank', 'noopener');
+    }
+
+    async function copyResult() {
+      const text = `${buildShareText()} ${window.location.href}`;
+      try {
+        if (!navigator.clipboard || !navigator.clipboard.writeText) {
+          throw new Error('Clipboard API is unavailable');
+        }
+        await navigator.clipboard.writeText(text);
+        alert('Результат скопирован. Теперь его можно отправить друзьям.');
+      } catch (error) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.className = 'sr-only';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          alert('Результат скопирован. Теперь его можно отправить друзьям.');
+        } catch (fallbackError) {
+          alert('Не удалось скопировать автоматически. Скопируйте текст вручную.');
+        } finally {
+          document.body.removeChild(textArea);
+        }
+        console.warn(error);
+      }
+    }
+
+    function runSelfTests() {
+      console.assert(buildShareText(null) === 'Я прошёл тест «Баня или сауна?». Попробуйте и вы!', 'Test 1 failed: empty share text');
+
+      const beginner = getResultData(2);
+      console.assert(beginner.persona === 'Новичок', 'Test 2 failed: beginner persona');
+
+      const middle = getResultData(7);
+      console.assert(middle.persona === 'Любитель пара', 'Test 3 failed: middle persona');
+
+      const expert = getResultData(10);
+      console.assert(expert.persona === 'Дед Палыч', 'Test 4 failed: expert persona');
+
+      const shareText = buildShareText({ score: 9, persona: 'Дед Палыч', title: 'Почти банный сомелье' });
+      console.assert(shareText.includes('9/10'), 'Test 5 failed: score missing in share text');
+      console.assert(shareText.includes('Дед Палыч'), 'Test 6 failed: persona missing in share text');
+    }
+
+    window.currentQuizResult = null;
+    runSelfTests();
+  </script>
+</body>
+</html>
