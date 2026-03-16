@@ -313,26 +313,18 @@
     }
 
     .cta-photo img {
-      width:100%;
-      max-width:180px;
-      border-radius:20px;
-      object-fit:cover;
+      width: 100%;
+      max-width: 180px;
+      border-radius: 20px;
+      object-fit: cover;
       box-shadow: var(--shadow);
-      border:1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: block;
     }
 
     .cta-text {
-      flex:1;
-      min-width:240px;
-    }
-
-    .cta-photo img {
-      width:100%;
-      max-width:200px;
-      border-radius:20px;
-      object-fit:cover;
-      box-shadow: var(--shadow);
-      border:1px solid rgba(255,255,255,0.12);
+      flex: 1;
+      min-width: 240px;
     }
 
     .cta-card {
@@ -384,6 +376,11 @@
       text-align: center;
       color: var(--muted);
       font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .footer-note a {
+      color: var(--text);
     }
 
     .sr-only {
@@ -399,14 +396,12 @@
     }
 
     @media (max-width: 700px) {
-      .cta-grid { grid-template-columns: 1fr; }
-      .cta-photo { justify-content:flex-start; }
-
       .wrap { width: min(100% - 20px, 960px); }
       .hero { padding: 24px 18px; border-radius: 24px; }
       .question { padding: 18px; }
       .stats { grid-template-columns: 1fr; }
       .cta-grid { grid-template-columns: 1fr; }
+      .cta-photo { justify-content: flex-start; }
       h1 { font-size: 34px; }
       .lead { font-size: 16px; }
       .question h3 { font-size: 19px; }
@@ -548,11 +543,11 @@
       <h2>Хотите не просто пройти тест, а попробовать правильный пар?</h2>
       <div class="cta-intro">
         <div class="cta-photo">
-          <img src="портрет квадрат.png" alt="Пар-мастер Александр Котлов" />
+          <img src="alexander-kotlov.png" alt="Пар-мастер Александр Котлов" />
         </div>
         <div class="cta-text">
           <p>Я — пар-мастер Александр Котлов. Провожу банные программы с мягким прогревом, парением вениками и спокойным, понятным подходом без банного экстрима. Если хочется не теории, а личного опыта — можно записаться на процедуру и почувствовать разницу между баней и сауной на себе.</p>
-          <p>Рботаю по адресу: Респ.Крым, г.Симферополь, ул. Киевская, 115.</p>
+          <p>Работаю по адресу: Респ.Крым, г.Симферополь, ул. Киевская, 115.</p>
         </div>
       </div>
       
@@ -573,7 +568,7 @@
       </div>
     </section>
 
-    <div class="footer-note">Автор и разработчик - AI-контент-креатор Анастасия Котлова https://t.me/akotlova_ai_creator . Разработано в ChatGPT, 2026.</div>
+    <div class="footer-note">Автор и разработчик — AI-контент-креатор Анастасия Котлова. <a href="https://t.me/akotlova_ai_creator" target="_blank" rel="noopener noreferrer">Telegram</a>. Разработано в ChatGPT, 2026.</div>
   </main>
 
   <script>
